@@ -1,0 +1,78 @@
+body{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-around;
+}
+#view-map{
+    height: 500px;
+    width: 90%;
+    padding: 20px;
+    border:  4px solid #e9af11;
+    border-radius: 10px;
+}
+
+#s-btn:hover{
+    background: #FFDA76;;
+    color: white;
+}
+#s-btn
+{
+    color: #e9af11;
+    border-color: #e9af11;
+}
+.container
+{
+    width: 100%;
+}
+#n-text{
+    color: #FFDA76;
+}
+h4{
+    border: 2px solid  #e9af11;
+    padding: 10px;
+    border-radius: 5px;
+}
+h4:hover{
+    background: #FFDA76;
+    border: 2px solid  #e9af11;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+h1{
+    color: #FFDA76;
+    text-shadow: 2px 2px #e9af11;
+}
+
+.search-box{
+    width: 250px;
+    border: 2px solid #e9af11;
+    border-radius: 5px;
+    height: 50px;
+}
+.search-box:focus{
+    border:none;
+    box-shadow: 5px 5px 5px #FFDA76;
+}
+.search{
+    color: white;
+    border: none;
+    border-radius: 15px;
+}
+.search-form
+{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+ 
+    border-radius: 10px;
+    height: 200px;
+    width: 400px;
+    font-size: 20px;
+
+    font-family: 'Bell MT';
+    justify-content: center;
+    align-items: center;
+}

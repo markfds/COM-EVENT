@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Details</title>
+    <link rel="stylesheet" href="./Comm.css">
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <h1 id="community-header"></h1>
+            <button class="backbtn" id="backbtn">Home</button>
+        </nav>
+        <div id="buttons">
+            <div id="ViewRegBtn" class="button">
+                <h4>View Registration</h4>
+                <img class="viewReg" src="./images/viewReg.jpg" alt="">
+            </div>
+            <div id="ViewEventBtn" class="button">
+                <h4>View Event</h4>
+                <img class="viewReg" src="./images/viewEv.jpg" alt="">
+            </div>
+            <div id="createEventBtn" class="button">
+                <h4>Create Event</h4>
+                <img class="viewReg" src="./images/createEv.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    
+
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js';
+        import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js';
+
+        const firebaseConfig = {
+            apiKey: 'yourAPIkey',
+            authDomain: "yourAuthDomain",
+            databaseURL: "yourDBURL",
+            projectId: "yourProjectID",
+            storageBucket: "yourStorageBucketURL",
+            messagingSenderId: "yourmessagingSenderId",
+            appId: "yourAppID",
+            measurementId: "yourmeasurementId"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        function updateCommunityHeader() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const communityName = urlParams.get('communityName');
+
+            if (communityName) {
+                document.getElementById('community-header').textContent = communityName;
+            }
+        }
+
+        updateCommunityHeader();
+
+        document.getElementById('ViewRegBtn').addEventListener('click', function() {
+            window.location.href='displayuserevent.html';
+            const urlParams = new URLSearchParams(window.location.search);
+            const communityName = urlParams.get('communityName');
+            if (communityName) {
+                window.location.href = `displayuserevent.html?communityName=${communityName}`;
+            }
+        });
+
+        document.getElementById('ViewEventBtn').addEventListener('click', function() {
+            window.location.href = 'viewmap.html';
+            const urlParams = new URLSearchParams(window.location.search);
+            const communityName = urlParams.get('communityName');
+            if (communityName) {
+                window.location.href = `viewmap.html?communityName=${communityName}`;
+            }
+        });
+
+        document.getElementById('createEventBtn').addEventListener('click', function() {
+            window.location.href = 'testmap.html';
+            const urlParams = new URLSearchParams(window.location.search);
+            const communityName = urlParams.get('communityName');
+            if (communityName) {
+                window.location.href = `testmap.html?communityName=${communityName}`;
+            }
+        });
+
+        document.getElementById('backbtn').addEventListener('click', function() {
+            window.location.href='HomePage.html';
+        });
+    </script>
+</body>
+</html>

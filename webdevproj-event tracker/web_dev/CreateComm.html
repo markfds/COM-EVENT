@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Community</title>
+    <link rel="stylesheet" href="CreateComm.css">
+</head>
+<body>
+    <div class="cont">
+        <div class="btnnav">
+            <button id="backbtn">Back</button>
+        </div>
+      
+        <div class="container">
+            <h1>Create Your Community</h1>
+            <form id="community-form" onsubmit="submitForm(event)">
+                <div class="form-group">
+                    <label for="community-name">Community Name</label>
+                    <input type="text" id="community-name" name="community-name" required>
+                </div>
+                <button type="submit">Create Community</button>
+            </form>
+        </div>
+    </div>
+   <script>
+    document.getElementById("backbtn").addEventListener('click',()=>{
+        window.location.href="HomePage.html"
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+            if (username) {
+                window.location.href = `HomePage.html?username=${username}`;
+            }
+    });
+   </script>
+    <script type="module" src="CreateComm.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomePage</title>
+  <link rel="stylesheet" href="Homepage.css">
+  
+</head>
+<body>
+  <div class="container">
+    <div id="dashboard">
+      <div id="user-info">
+        <div id="profile">
+          <img src="./images/profile.jpg" alt="Profile Picture">
+        </div>
+        <div id="username">Username</div>
+      </div>
+      <input type="button" id="signoutbtn" value="Sign Out">
+    </div>
+    <div id="buttons">
+      <button id="ViewComm" class="button">View Communities</button>
+  
+      <button id="JoinComm"class="button">Join Community</button>
+
+      <button id="CreateComm"class="button">Create Community</button>
+    </div>
+   
+  </div>
+  
+  <script src="HomePage.js" type="module"></script>
+  <script>
+        function updateuserName() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get('username');
+
+            if (username) {
+                document.getElementById('username').textContent = username;
+            }
+        }
+
+        updateuserName();
+
+  </script>
+</body>
+</html>

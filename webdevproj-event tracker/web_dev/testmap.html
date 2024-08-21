@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="testmap.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+          <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+            <h1 class="fs-8" id="n-text">CREATE EVENT</h1>
+          </a>
+    
+          <ul class="nav nav-pills">
+            <li class="nav-item"><button  class="nav-link " aria-current="page" id="n-text" ><h4>View Registration</h4></button></li>
+            <li class="nav-item"><button  class="nav-link " aria-current="page" id="n-text" ><h4>View Events</h4></button></li>
+            <li class="nav-item"><button  class="nav-link " aria-current="page" id="n-text" ><h4>BACK</h4></button></li>
+          </ul>
+        </header>
+      </div>
+    <div class="containers">
+        <div id="map">
+
+        </div>
+   
+
+        <div class="col-md-10 mx-auto col-lg-5">
+          <form id="eventForm" class="p-4 p-md-5 border rounded-3 bg-body-tertiary">
+            <div class="form-floating mb-3">
+              <input type="text" class="event-name form-control" id="floatingInput" placeholder="event name">
+              <label for="floatingInput">Event:</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="text" class="lat-long form-control" id="floatingInput" placeholder="lat long">
+              <label for="floatingPassword">Coordinates</label>
+            </div>
+            <button class="submit w-100 btn btn-lg btn-primary" id="subbtn" >SUBMIT</button>
+            <hr class="my-4">
+          </form>
+        </div>
+     
+    </div>
+   
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+
+    <script type="module">
+      import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js'
+      import { getDatabase, ref, push,set,onValue  } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js' 
+    
+      import { getAnalytics } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js'
+  
+    
+      import { getAuth } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js'
+      import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js'
+
+      const firebaseConfig = {
+            apiKey: 'yourAPIkey',
+            authDomain: "yourAuthDomain",
+            databaseURL: "yourDBURL",
+            projectId: "yourProjectID",
+            storageBucket: "yourStorageBucketURL",
+            messagingSenderId: "yourmessagingSenderId",
+            appId: "yourAppID",
+            measurementId: "yourmeasurementId"
+        };
+  const app = initializeApp(firebaseConfig);
+  const database=getDatabase(app);
+  const CommunityEventDB = ref(database, 'CommunityEvent');
+
+document.getElementById('eventForm').addEventListener('submit',submitForm);
+
+function submitForm(e) {
+    e.preventDefault();
+    var coordinates = document.querySelector(".lat-long").value;
+    var [lat, lng] = coordinates.split(',');
+    var event = document.querySelector(".event-name").value;
+    var communityName = new URLSearchParams(window.location.search).get('communityName'); 
+    saveEvent(communityName, event, coordinates);
+    console.log(communityName, lat, lng, event);
+}
+
+const getElementVal = (id) => {
+    return document.getElementById(id).value;
+}
+
+const saveEvent = (communityName, event, coordinates) => {
+    var communityEventRef = ref(database, `CommunityEvent/${communityName}`);
+    var newComunityEvent = push(communityEventRef);
+
+    set(newComunityEvent, {
+        Event: event,
+        Coordinates: coordinates,
+    });
+};  
+document.querySelectorAll('#n-text')[1].addEventListener('click',()=>{
+  window.location.href = 'displayuserevent.html';
+            const urlParams = new URLSearchParams(window.location.search);
+            const communityName = urlParams.get('communityName');
+            if (communityName) {
+                window.location.href = `displayuserevent.html?communityName=${communityName}`;
+            }
+})
+document.querySelectorAll('#n-text')[2].addEventListener('click',()=>{
+  window.location.href = 'viewmap.html';
+            const urlParams = new URLSearchParams(window.location.search);
+            const communityName = urlParams.get('communityName');
+            if (communityName) {
+                window.location.href = `viewmap.html?communityName=${communityName}`;
+            }
+})
+document.querySelectorAll('#n-text')[3].addEventListener('click',()=>{
+  window.location.href = 'Comm.html';
+            const urlParams = new URLSearchParams(window.location.search);
+            const communityName = urlParams.get('communityName');
+            if (communityName) {
+                window.location.href = `Comm.html?communityName=${communityName}`;
+            }
+})
+    </script>
+    <script type="module" src="testmap.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

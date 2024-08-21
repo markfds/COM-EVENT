@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+header{
+    width: 100vw;
+    height: 5em;
+    border: 4px solid #e9af11;
+    padding: 10px;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+}
+.container
+{
+    width: 100%;
+    position: relative;
+    
+}
+#n-text{
+    color: #FFDA76;
+}
+#event-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+    
+}
+.event-item{
+    padding: 10px;
+    border-radius: 5px;
+    border: 4px solid #FFDA76;;
+}
+nav{
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 5em;
+    background: white;
+    padding: 10px;
+}
+.event-item {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    opacity: 80%;
+}
+.header{
+    color:#FFDA76;
+    text-shadow: 2px 2px #e9af11;
+}
+h2, h3 {
+    margin-top: 0;
+}
+
+ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+body {
+   margin: 0;
+   padding: 0;
+    background: url('./images/userEv.png');
+    background-repeat: no-repeat;
+}
+
+#backbtn {
+    border: 3px solid #e9af11;
+    color: #FFDA76;
+    border-radius: 15px;
+    padding: 15px;
+    height: 4em;
+    width: 5em;
+    background: none;
+    font-size: 15px;
+}
+#backbtn:hover{
+    border: 3px solid #e9af11;
+    color: white;
+    background: #FFDA76;
+
+}
+h4{
+    border: 2px solid  #e9af11;
+    padding: 10px;
+    border-radius: 5px;
+}
+h4:hover{
+    background: #FFDA76;
+    border: 2px solid  #e9af11;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
